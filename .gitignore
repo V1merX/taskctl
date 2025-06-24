@@ -1,0 +1,38 @@
+# Общие системные файлы
+.DS_Store
+*.swp
+*.swo
+Thumbs.db
+._*
+
+# Директории IDE и редакторов
+.vscode/
+.idea/
+*.suo
+*.user
+*.code-workspace
+
+# Бинарные файлы и скомпилированные артефакты
+bin/
+*.exe
+*.dll
+*.so
+*.a
+*.o
+*.class
+*.jar
+*.war
+*.ear
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.bak
+*.pid
+*.seed
+
+# Зависимости и настройки окружения
+.env
+*.env.local
+*.env.*.local
+configs/
