@@ -3,8 +3,6 @@ package httpserver
 import (
 	"fmt"
 	"taskctl/internal/config"
-
-	"github.com/gin-gonic/gin"
 )
 
 type Server struct {
@@ -22,12 +20,7 @@ func NewServer(srvOptions config.HTTPServer) *Server {
 func (s *Server) Start() error {
 	const op = "internal.httpserver.Server.Start"
 
-	router := gin.Default()
-
-	// TODO: add routes
-	// router.POST("/tasks", createTaskHandler)
-	// router.GET("/tasks/:id", getTaskHandler)
-	// router.DELETE("/tasks/:id", deleteTaskHandler)
+	router := s.setupRoutes()
 
 	if err := router.Run(fmt.Sprintf("%s:%d", s.Host, s.Port)); err != nil {
 		return fmt.Errorf("%s: %w", op, err)

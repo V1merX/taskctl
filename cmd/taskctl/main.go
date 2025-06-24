@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 	"taskctl/internal/config"
-	"taskctl/internal/storage/httpserver"
+	"taskctl/internal/httpserver"
 
 	"github.com/rs/zerolog"
 )
