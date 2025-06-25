@@ -1,6 +1,7 @@
 package model
 
 type TaskStatus string
+type TaskID string
 
 const (
 	TaskStatusPending    TaskStatus = "pending"
@@ -10,7 +11,7 @@ const (
 )
 
 type Task struct {
-	ID        int64       `json:"id"`
+	ID        TaskID       `json:"id"`
 	Status    TaskStatus  `json:"status"`
 	Result    interface{} `json:"result"`
 	Duration  int64       `json:"duration"`

@@ -4,6 +4,7 @@ import (
 	"os"
 	"taskctl/internal/config"
 	"taskctl/internal/httpserver"
+	"taskctl/internal/storage"
 
 	"github.com/rs/zerolog"
 )
@@ -26,7 +27,9 @@ func run() error {
 		return err
 	}
 
-	srv := httpserver.NewServer(cfg.Server)
+	db := storage.New()
+
+	srv := httpserver.NewServer(db, cfg.Server)
 	if err := srv.Start(); err != nil {
 		return err
 	}

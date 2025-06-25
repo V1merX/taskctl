@@ -3,18 +3,16 @@ package httpserver
 import (
 	"fmt"
 	"taskctl/internal/config"
+	"taskctl/internal/storage"
 )
 
 type Server struct {
-	Host string
-	Port int8
+	settings *config.HTTPServer
+	db       *storage.Storage
 }
 
-func NewServer(srvOptions config.HTTPServer) *Server {
-	return &Server{
-		Host: srvOptions.Host,
-		Port: srvOptions.Port,
-	}
+func NewServer(db *storage.Storage, srvOptions config.HTTPServer) *Server {
+	return &Server{db: db, settings: &srvOptions}
 }
 
 func (s *Server) Start() error {
@@ -22,7 +20,7 @@ func (s *Server) Start() error {
 
 	router := s.setupRoutes()
 
-	if err := router.Run(fmt.Sprintf("%s:%d", s.Host, s.Port)); err != nil {
+	if err := router.Run(fmt.Sprintf("%s:%d", s.settings.Host, s.settings.Port)); err != nil {
 		return fmt.Errorf("%s: %w", op, err)
 	}
 

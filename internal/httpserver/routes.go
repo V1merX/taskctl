@@ -7,7 +7,7 @@ import (
 func (s *Server) setupRoutes() *gin.Engine {
 	var r gin.Engine
 
-	// taskRep	:= storage.NewStorage()
+	// taskRep	:= repository.NewTaskRepository(s.db)
 	// taskService := service.NewTaskService()
 	// taskHandler := handler.NewTaskHandler(taskService)
 

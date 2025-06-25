@@ -1,18 +1,30 @@
 package storage
 
-import "taskctl/internal/model"
-
-type StorageRepository interface {
-}
-
-type TaskID string
+import (
+	"errors"
+	"sync"
+	"taskctl/internal/model"
+)
 
 type Storage struct {
-	data map[TaskID]model.Task
+	data map[model.TaskID]model.Task
+	mu   sync.Mutex
 }
 
-func NewStorage() StorageRepository {
+func New() *Storage {
 	return &Storage{
-		data: make(map[TaskID]model.Task, 0),
+		data: make(map[model.TaskID]model.Task, 0),
 	}
+}
+
+func (s *Storage) Set(task model.Task) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	
+	if _, exists := s.data[task.ID]; exists {
+		return errors.New("task already exists")
+	}
+	s.data[task.ID] = task
+
+	return nil
 }
