@@ -8,17 +8,29 @@
 - Для тестирования: curl/httpie/Postman
 
 ## Установка и запуск
+
+### Сборка проекта
 1. Клонировать репозиторий:
 git clone https://github.com/V1merX/taskctl.git
 cd taskctl
 
-2. Запустить сервер:
-go run cmd/main.go
+2. Собрать бинарный файл:
+go build -o taskctl cmd/taskctl/main.go
+
+### Запуск сервера
+1. Убедитесь, что файл config.json находится в той же директории, где расположен бинарник taskctl
+2. Запустите сервер:
+./taskctl
 
 Сервер будет доступен по адресу: http://localhost:8080
 
+## Структура проекта
+- cmd/taskctl/main.go - точка входа
+- configs/config.json - конфигурационный файл (должен быть скопирован рядом с бинарником)
+- internal/ - основная логика приложения
+
 ## Конфигурация
-Файл конфигурации config.json должен находиться в папке configs:
+Поместите файл config.json в папку рядом с исполняемым файлом:
 {
     "http-server": {
         "host": "localhost", 
