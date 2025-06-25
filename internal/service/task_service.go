@@ -1,6 +1,7 @@
 package service
 
 import (
+	"math/rand/v2"
 	"taskctl/internal/model"
 	"taskctl/internal/repository"
 	"time"
@@ -58,7 +59,9 @@ func (t *taskService) Delete(taskID model.TaskID) error {
 func (t *taskService) processTask(task model.Task) {
 	t.rep.UpdateTaskStatus(task.ID, string(model.TaskStatusInProgress))
 
-	time.Sleep(10 * time.Second)
+	// Имитируем долгую I/O-операцию
+	n := 10+rand.IntN(20)
+	time.Sleep(time.Duration(n) * time.Second)
 
 	updatedTask := task
 	updatedTask.Status = model.TaskStatusCompleted
