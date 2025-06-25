@@ -17,12 +17,12 @@ func init() {
 
 func main() {
 	if err := run(); err != nil {
-		logger.Fatal().Err(err)
+		logger.Fatal().Err(err).Msg("Application failed")
 	}
 }
 
 func run() error {
-	cfg, err := config.Read("config.json")
+	cfg, err := config.Read("configs/config.json")
 	if err != nil {
 		return err
 	}

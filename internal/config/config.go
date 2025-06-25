@@ -16,7 +16,7 @@ type Config struct {
 
 type HTTPServer struct {
 	Host string `json:"host"`
-	Port int8   `json:"port"`
+	Port int   `json:"port"`
 }
 
 func Read(filename string) (*Config, error) {

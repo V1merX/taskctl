@@ -1,20 +1,23 @@
 package httpserver
 
 import (
+	"taskctl/internal/handler"
+	"taskctl/internal/repository"
+	"taskctl/internal/service"
+
 	"github.com/gin-gonic/gin"
 )
 
 func (s *Server) setupRoutes() *gin.Engine {
-	var r gin.Engine
+	r := gin.New()
 
-	// taskRep	:= repository.NewTaskRepository(s.db)
-	// taskService := service.NewTaskService()
-	// taskHandler := handler.NewTaskHandler(taskService)
+	taskRep := repository.NewTaskRepository(s.db)
+	taskService := service.NewTaskService(taskRep)
+	taskHandler := handler.NewTaskHandler(taskService)
 
-	// TODO: add routes
-	// r.POST("/tasks", createTaskHandler)
-	// r.GET("/tasks/:id", getTaskHandler)
-	// r.DELETE("/tasks/:id", deleteTaskHandler)
+	r.POST("/tasks", taskHandler.Create)
+	r.GET("/tasks/:task_id", taskHandler.Get)
+	r.DELETE("/tasks/:task_id", taskHandler.Delete)
 
-	return &r
+	return r
 }
